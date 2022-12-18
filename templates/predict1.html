@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Nina Product Demo Dashboard">
+    <meta name="author" content="praveen">
+
+    <title>Nina DS Team Product Demo - Dashboard</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="static/css/sb-admin-2.css" rel="stylesheet">
+    <style>
+
+        .round-button {
+            margin-left: 5px;
+            float: right;
+            display: block;
+            width: 50px;
+            height: 50px;
+            line-height: 40px;
+            border: 2px solid #f5f5f5;
+            border-radius: 50%;
+            color: black;
+            text-align: center;
+            text-decoration: none;
+            background: #555777;
+            box-shadow: 0 0 3px gray;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+            .round-button:hover {
+                background: #777555;
+            }
+
+        .row:after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        [class*="col-"] {
+            float: left;
+            padding: 5px;
+            /* width: 100%; */
+        }
+
+        .footer {
+            background-color: #0099cc;
+            color: #ffffff;
+            text-align: center;
+            font-size: 12px;
+            padding: 15px;
+        }
+
+       
+    </style>
+
+</head>
+
+<body id="page-top">
+    <div>
+        <div>
+            <div id="wrapper">
+                <!-- Topbar -->
+                <nav class="d-flex navbar-light" style="background-color: #e3f2fd;">
+                    <div class="justify-content-center ml-auto mt-3">
+                        <h2 style="color:blue;text-align:center">Nina DS Team Product Recommendation Page</h2>
+                    </div>
+                    <div class="topbar ml-auto mt-3">
+                        <a class="nav-link dropdown-toggle" href="{{ url_for('logout') }}" aria-expanded="false">
+                            <span class="mr-2 d-none d-lg-inline small" style="color:blueviolet">{{ session['username'] }}</span>
+                            <img class="img-profile rounded-circle" src="static/images/poke.png" width="16px" height="16px">
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div class="mx-3">
+            <form action="/predict" method="POST">
+                <div id="parent" class="d-flex w-100">
+                    <div id="left" class="w-50">
+                        <p style="color:darkblue">Description :</p>
+                        <textarea class="desc w-100" style="width: 694px; height: 188px;">{{desc}} </textarea>
+                        <br />
+                        <p style="color:darkblue" class="mt-3">Top Keywords :</p>
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col" style="text-align:center">keywords</th>
+                                    <th scope="col" style="text-align:center">scores</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for key in keys[:5] %}
+                                <tr>
+                                    <td style="text-align:center">{{ key[0] }}</td>
+                                    <td style="text-align:center">{{ key[1] }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <br />
+                        <p style="color:darkblue">Long Keywords :</p>
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col" style="text-align:center"> Top Long keywords</th>
+                                    <th scope="col" style="text-align:center">scores</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for longkey in longkeys[:5] %}
+                                <tr>
+                                    <td style="text-align:center">{{ longkey[0] }}</td>
+                                    <td style="text-align:center">{{ longkey[1] }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <br />
+                        <p style="color:darkblue"> Predicted Taxonomy Classes :</p>
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col" style="text-align:center"> Taxonomy Class</th>
+                                    <th scope="col" style="text-align:center">Ranks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for t in tdict %}
+                                <tr>
+                                    <td style="text-align:center">{{ t }}</td>
+                                    <td style="text-align:center">{{ tdict[t]}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="right" class="rightbar w-75 ml-5" style="max-height:100vh;overflow-y:scroll;">
+
+                        <br />
+                        <p style="color:darkblue"> Recommended Urls:</p>
+                        <table class="table table-bordered overflow-scroll">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col" style="text-align:center"> Recommended Urls</th>
+                                    <th scope="col" style="text-align:center"> Page Rank</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for url in urldict %}
+                                <tr>
+                                    <td style="text-align:left">{{ url }}</td>
+                                    <td style="text-align:left">{{ urldict[url] }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end mb-3">
+                    <a class="btn btn-primary me-md-2" href="{{ url_for('url') }}">Predict New</a>
+                </div>
+            </form>
+        </div>        
+        </div>
+ 
+
+   
+</body>
+</html>

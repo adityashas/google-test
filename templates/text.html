@@ -1,0 +1,27 @@
+{% include 'user.html' %}
+
+<style>
+    .nav-link .btn btn-primary {
+        justify-content: flex-end;
+        display: flex;
+    }
+</style>
+<form action="/text" method="get">
+    <div class="nav-link">
+        <p class="boarder pt-5" style="margin-top:50px;"><h5 style="font-weight:bold;color:black">Classify Text:</h5></p>
+        <textarea cols="70" id="name" name="name" placeholder="Enter Text to classify" rows="10" style="width:70%;max-width:70%"></textarea>
+        <br />
+        <button class="btn btn-primary mt-3 ml-auto" type="submit" value="Classify" data-bs-toggle="button" autocomplete="off">Classify</button>
+    </div>
+</form>
+
+
+<div class="container-fluid bottom-container">
+    <footer class="w-100">
+        <p class="w-100" style="color: black; text-align: center">Copyright &copy;2022-2023. Nina Product Demo. All rights reserved.</p>
+    </footer>
+</div>
+
+
+</body>
+</html>
