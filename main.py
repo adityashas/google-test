@@ -57,7 +57,7 @@ app = Flask(__name__)
 
 
 ###################################### Text or Url Query Input Page ##########
-@app.route("/", methods=['POST','GET'])
+@app.route("/url", methods=['POST','GET'])
 def url():
         global name
         if request.method == 'GET':               
@@ -126,4 +126,4 @@ def predict():
                 urldict[df['url'][i]] = n
         
         return render_template("predict.html",title="prediction", desc=desc,keys=keys, longkeys=longkeys, tdict = tdict, urldict = urldict)
-app.run()
+
