@@ -24,7 +24,7 @@ from taxonomy_mapper import TaxonomyPredictor
 
 api = Api()
 app = Flask(__name__)
-run_with_ngrok(app)
+#run_with_ngrok(app)
 
 #app.config['SECRET_KEY'] = secret_key
 
@@ -57,7 +57,7 @@ run_with_ngrok(app)
 
 
 ###################################### Text or Url Query Input Page ##########
-@app.route("/url", methods=['POST','GET'])
+@app.route("/", methods=['POST','GET'])
 def url():
         global name
         if request.method == 'GET':               
