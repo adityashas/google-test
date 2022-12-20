@@ -16,7 +16,7 @@ import ctypes
 import validators
 #from google.cloud import storage
 from flask import Flask
-from flask_ngrok import run_with_ngrok
+#from flask_ngrok import run_with_ngrok
 
 
 from taxonomy_mapper import TaxonomyPredictor
@@ -57,7 +57,7 @@ app = Flask(__name__)
 
 
 ###################################### Text or Url Query Input Page ##########
-@app.route("/url", methods=['POST','GET'])
+@app.route("/", methods=['POST','GET'])
 def url():
         global name
         if request.method == 'GET':               
