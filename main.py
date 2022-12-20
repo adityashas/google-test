@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_mongoengine import MongoEngine
 from flask import render_template, request, json, jsonify, Response, redirect, flash, url_for, session
-import flask.scaffold
-flask.helpers._endpoint_from_view_func = flask.scaffold._endpoint_from_view_func
+#import flask.scaffold
+#flask.helpers._endpoint_from_view_func = flask.scaffold._endpoint_from_view_func
 from flask_restplus import Resource
 from flask_restplus import Api
 from flask_wtf import FlaskForm
