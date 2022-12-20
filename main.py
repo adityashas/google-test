@@ -127,6 +127,6 @@ def predict():
         
         return render_template("predict.html",title="prediction", desc=desc,keys=keys, longkeys=longkeys, tdict = tdict, urldict = urldict)
     
-app.run()
+
         
 
